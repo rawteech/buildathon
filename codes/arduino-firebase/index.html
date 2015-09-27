@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="DemoApp">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <script src="http://code.angularjs.org/1.2.6/angular.min.js"></script>
+
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+
+
+  <script type="text/javascript">
+    var myApp = angular.module('DemoApp', ['firebase']);
+
+    function DemoCtrl($scope, $firebase) {
+
+        $scope.firebaseRef = new Firebase("https://YOUR_ACCOUNT.firebaseio.com/temperature" );
+        $scope.temperatures = $firebase($scope.firebaseRef);
+    }
+
+  </script>
+
+</head>
+
+
+<body class="container">
+    <h2>Arduino YUN, Firebase and CURL</h2>
+    <div ng-controller="DemoCtrl"
+          class="form-inline panel panel-default">
+        <div class="panel-body">
+
+            <ul ng-repeat="temp in temperatures">
+                <li><h1>°</h1></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
